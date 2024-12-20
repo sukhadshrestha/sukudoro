@@ -1,0 +1,81 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    background-color: aliceblue;
+    color: #505050;
+}
+
+div{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.app {
+    background-color: beige;
+    border-radius: 16px;
+    width: 500px;
+    margin: auto;
+    padding: 40px;
+}
+
+.timer{
+    font-size: 32px;
+}
+
+button{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 15px;
+    background-color: aquamarine;
+    border-width: 1px;
+    border-color: #00000000;
+    border-radius: 16px;
+    color: #505050;
+}
+
+button:hover{
+    border-width: 1px;
+    border-color: black;
+    background-color: #7fffa7;
+    cursor: pointer;
+}
+
+.close_popup_btn{
+    display: block;
+    width: 24px;
+    float: right;
+}
+
+.close_popup_btn:hover{
+    cursor: pointer;
+}
+
+table {
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+
+th{
+    padding: 10px;
+}
+
+#popup{
+    display: none;
+}
+
+.popup_overlay{
+    position: fixed;
+    display: none;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background-color: #f0f0f080;
+}
+
+.popup_content{
+    background-color: aliceblue;
+    padding: 50px;
+}

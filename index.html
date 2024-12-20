@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="app">
+        <h2>Pomodoro</h2>
+        <div class="timer_types">
+            <button id="focus_period">Focus Period</button>
+            <button id="break_period">Break Period</button>
+            <button id="customize">Customize</button>
+        </div>
+        <div class="timer" id="timer">25:00</div>
+        <div class="controls">
+            <button id="start">Start</button>
+            <button id="pause">Pause</button>
+            <button id="reset">Reset</button>
+            <button id="end">End</button>
+        </div>
+        <h2>Tasks</h2>
+        <div class="tasks">
+            <input type="text" id="task_input" placeholder="Add a task" required>
+            <input type="number" id="no_of_periods" placeholder="No. of Periods" required>
+            <button id="add_task">Add Task</button>
+            <table  id="task_list">
+                <tr>
+                    <th>Task</th>
+                    <th>No. of Periods</th>
+                    <th>Delete Task</th>
+                </tr>
+            </table>
+        </div>
+        <div id="popup" class="popup_overlay">
+            <div class="popup_content">
+                <img id="close_popup_btn" class="close_popup_btn" src="assets/images/close.png">
+                <h2>Customize</h2>
+                <div class="customize_timer">
+                    <input type="number" id="custom_focus" placeholder="Focus Period Minutes" required>
+                    <input type="number" id="custom_break" placeholder="Break Period Minutes" required>
+                    <button id="save_customization">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
