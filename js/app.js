@@ -35,8 +35,6 @@ function updateTimer(){
     timer_element.textContent = `${String(timer_minutes).padStart(2,'0')}:${String(timer_seconds).padStart(2,'0')}`;
 }
 
-// popup for customization and done for tasks and store data in session
-
 function customizeTime(){
     let custom_focus_time = custom_focus.value;
     let custom_break_time = custom_break.value;
@@ -141,22 +139,54 @@ function addTask(){
     const no_of_periods = task_periods.value;
     if(!taskText || !no_of_periods) return;
 
-    const deleteTask = document.createElement('button');
-    deleteTask.textContent = "Delete";
-    deleteTask.addEventListener('click', () => {
-        row.remove();
-        // resetTimer();
-    });
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td class="task-text-cell">${taskText}</td>
+        <td class="no-of-periods-cell">${no_of_periods}</td>
+    <td>
+      <button class="edit-btn">Edit</button>
+      <button class="delete-btn">Delete</button>
+    </td>
+    `;
 
-    let row = task_list.insertRow(-1);
-    let column1 = row.insertCell(0);
-    let column2 = row.insertCell(1);
-    let column3 = row.insertCell(2);
-    column1.innerHTML = `${taskText}`;
-    column2.innerHTML = `${no_of_periods}`;
-    column3.appendChild(deleteTask);
+    row.querySelector('.edit-btn').addEventListener('click', () => editRow(row));
+
+    row.querySelector('.delete-btn').addEventListener('click', () => row.remove());
+
+    task_list.appendChild(row);
     task_input.value = '';
     task_periods.value = null;
+}
+
+function editRow(row){
+    const edit_btn = row.querySelector('.edit-btn');
+    const task_cell = row.querySelector('.task-text-cell');
+    const period_cell = row.querySelector('.no-of-periods-cell');
+
+    const isEditing = edit_btn.getAttribute('data-editing') === 'true';
+
+    if(!isEditing)
+    {
+        const originalText = task_cell.textContent.trim();
+        const originalPeriod = period_cell.textContent.trim();
+
+        task_cell.innerHTML = `<input type="text" id="new-text" value="${originalText}"/>`;
+        period_cell.innerHTML = `<input type="number" id="new-period" value="${originalPeriod}"/>`;
+
+        edit_btn.textContent = "Save";
+        edit_btn.setAttribute('data-editing', 'true');
+    }
+    else{
+        const newText = document.getElementById('new-text');
+        const newPeriod = document.getElementById('new-period');
+        if(!newText.value || !newPeriod.value){
+            console.log('empty');
+        }
+        task_cell.textContent = newText.value.trim();
+        period_cell.textContent = newPeriod.value.trim();
+        edit_btn.textContent = "Edit";
+        edit_btn.setAttribute('data-editing', 'false');
+    }
 }
 
 // Event Listeners
