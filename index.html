@@ -24,8 +24,10 @@
         </div>
         <h2>Tasks</h2>
         <div class="tasks">
-            <input type="text" id="task_input" placeholder="Add a task" required>
-            <input type="number" id="no_of_periods" placeholder="No. of Periods" required>
+            <label for="task_input">Add task*</label>
+            <input type="text" id="task_input" placeholder="Add a task" required><br>
+            <label for="no_of_periods">No. of Periods*</label>
+            <input type="number" id="no_of_periods" placeholder="No. of Periods" min="1" step="1" required><br>
             <button id="add_task">Add Task</button>
             <table  id="task_list">
                 <tr>
@@ -40,8 +42,10 @@
                 <img id="close_popup_btn" class="close_popup_btn" src="assets/images/close.png">
                 <h2>Customize</h2>
                 <div class="customize_timer">
-                    <input type="number" id="custom_focus" placeholder="Focus Period Minutes" required>
-                    <input type="number" id="custom_break" placeholder="Break Period Minutes" required>
+                    <label for="custom_focus">Focus Period(Minutes)*</label>
+                    <input type="number" id="custom_focus" placeholder="Focus Period Minutes" min="1" step="1" required><br>
+                    <label for="custom_break">Break Period(Minutes)*</label>
+                    <input type="number" id="custom_break" placeholder="Break Period Minutes" min="1" step="1" required><br>
                     <button id="save_customization">Save</button>
                 </div>
             </div>

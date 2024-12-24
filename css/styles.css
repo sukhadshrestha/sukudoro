@@ -10,6 +10,12 @@ div{
     padding-bottom: 10px;
 }
 
+input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
 .app {
     background-color: beige;
     border-radius: 16px;
@@ -20,6 +26,10 @@ div{
 
 .timer{
     font-size: 32px;
+}
+
+#add_task{
+    margin-top: 10px;
 }
 
 button{
@@ -37,6 +47,12 @@ button:hover{
     border-color: black;
     background-color: #7fffa7;
     cursor: pointer;
+}
+
+button:disabled{
+    background-color: rgb(175, 175, 175);
+    cursor: not-allowed;
+    border-width: 0px;
 }
 
 .close_popup_btn{

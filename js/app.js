@@ -31,6 +31,7 @@ const customize_btn = document.getElementById('customize');
 const popup = document.getElementById('popup');
 const close_popup_btn = document.getElementById('close_popup_btn');
 
+//Functions for TIMER start ------------------------------------------------------
 function updateTimer(){
     timer_element.textContent = `${String(timer_minutes).padStart(2,'0')}:${String(timer_seconds).padStart(2,'0')}`;
 }
@@ -40,9 +41,25 @@ function customizeTime(){
     let custom_break_time = custom_break.value;
     focus_minutes = custom_focus_time;
     break_minutes = custom_break_time;
+    
+    if(!Number.isInteger(Number(focus_minutes)) || focus_minutes <= 0){
+        custom_focus.style.border = '2px solid red';
+        alert("Enter whole number");
+        return;
+    }
+    
+    if(!Number.isInteger(Number(break_minutes)) || break_minutes <= 0){
+        custom_break.style.border = '2px solid red';
+        alert("Enter whole number");
+        return;
+    }
+
+    custom_focus.style.border = '1px solid #ccc';
+    custom_break.style.border = '1px solid #ccc';
+
     if(is_focus_period){
         timer_minutes = focus_minutes;
-        timer_secondsseconds = focus_seconds;
+        timer_seconds = focus_seconds;
         updateTimer();
     } 
     else {
@@ -57,7 +74,7 @@ function focusPeriodTimer(){
     if(!is_focus_period){
         clearInterval(timer);
         timer_minutes = focus_minutes;
-        timer_secondsseconds = focus_seconds;
+        timer_seconds = focus_seconds;
         updateTimer();
         is_running = false;
         is_focus_period = true;
@@ -102,12 +119,18 @@ function startTimer(){
         }
         updateTimer();
     }, 1000)
+    start_btn.disabled = true;
+    pause_btn.disabled = false;
 }
+
+pause_btn.disabled = true;
 
 function pauseTimer(){
     if(is_running == false) return;
     is_running = false;
     clearInterval(timer);
+    start_btn.disabled = false;
+    pause_btn.disabled = true;
 }
 
 function resetTimer(){
@@ -123,6 +146,8 @@ function resetTimer(){
         timer_seconds = break_seconds;
         updateTimer();    
     }
+    start_btn.disabled = false;
+    pause_btn.disabled = true;
 }
 
 function endTimer(){
@@ -132,21 +157,50 @@ function endTimer(){
     else{
         focusPeriodTimer();
     }
+    start_btn.disabled = false;
+    pause_btn.disabled = true;
 }
 
+//Functions for TIMER end------------------------------------------------------
+
+//Functions for TASK start ------------------------------------------------------
 function addTask(){
-    const taskText = task_input.value.trim();
-    const no_of_periods = task_periods.value;
-    if(!taskText || !no_of_periods) return;
+    const task_text = task_input.value.trim();
+    const no_of_periods = task_periods.value.trim();
+
+    if(!task_text){
+        task_input.style.border = '2px solid red';
+        alert("Task is required");
+        return;
+    }
+
+    if(!no_of_periods){
+        task_periods.style.border = '2px solid red';
+        alert("No. of periods is required");
+        return;
+    }
+
+    if(!Number.isInteger(Number(no_of_periods)) || no_of_periods <= 0){
+        task_periods.style.border = '2px solid red';
+        alert("Enter whole number");
+        return;
+    }
+
+
+    task_periods.style.border = '1px solid #ccc';
+    task_input.style.border = '1px solid #ccc';
+
 
     const row = document.createElement('tr');
     row.innerHTML = `
-        <td class="task-text-cell">${taskText}</td>
-        <td class="no-of-periods-cell">${no_of_periods}</td>
-    <td>
-      <button class="edit-btn">Edit</button>
-      <button class="delete-btn">Delete</button>
-    </td>
+        <tr>
+            <td class="task-text-cell">${task_text}</td>
+            <td class="no-of-periods-cell">${no_of_periods}</td>
+            <td>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </td>
+        </tr>
     `;
 
     row.querySelector('.edit-btn').addEventListener('click', () => editRow(row));
@@ -156,6 +210,7 @@ function addTask(){
     task_list.appendChild(row);
     task_input.value = '';
     task_periods.value = null;
+    saveTableData();
 }
 
 function editRow(row){
@@ -177,17 +232,83 @@ function editRow(row){
         edit_btn.setAttribute('data-editing', 'true');
     }
     else{
-        const newText = document.getElementById('new-text');
-        const newPeriod = document.getElementById('new-period');
-        if(!newText.value || !newPeriod.value){
-            console.log('empty');
+        const new_text = document.getElementById('new-text');
+        const new_period = document.getElementById('new-period');
+
+        if(!new_text.value){
+            new_text.style.border = '2px solid red';
+            alert("Task is required");
+            return;
         }
-        task_cell.textContent = newText.value.trim();
-        period_cell.textContent = newPeriod.value.trim();
+        
+        if(!new_period){
+            new_period.style.border = '2px solid red';
+            alert("No. of periods is required");
+            return;
+        }
+    
+        if(!Number.isInteger(Number(new_period.value)) || new_period.value <= 0){
+            new_period.style.border = '2px solid red';
+            alert("Enter whole number");
+            return;
+        }
+        task_cell.textContent = new_text.value.trim();
+        period_cell.textContent = new_period.value.trim();
         edit_btn.textContent = "Edit";
         edit_btn.setAttribute('data-editing', 'false');
+
+        new_text.style.border = '1px solid #ccc';
+        new_period.style.border = '1px solid #ccc';
     }
 }
+//Functions for TASKS end------------------------------------------------------
+
+//Functions for STORAGE start------------------------------------------------------
+
+// function initializeTable() {
+//     const storedData = JSON.parse(localStorage.getItem('task_list')) || [];
+//     storedData.forEach(rowData => {
+//         addRowToTable(rowData.task, rowData.period);
+//     });
+// }
+
+// function addRowToTable(task, period){
+//     const row = document.createElement('tr');
+//     row.innerHTML = `
+//         <tr>
+//             <td class="task-text-cell">${task}</td>
+//             <td class="no-of-periods-cell">${period}</td>
+//             <td>
+//                 <button class="edit-btn">Edit</button>
+//                 <button class="delete-btn">Delete</button>
+//             </td>
+//         </tr>
+//     `;
+
+//     row.querySelector('.edit-btn').addEventListener('click', () => editRow(row));
+
+//     row.querySelector('.delete-btn').addEventListener('click', () => {
+//         row.remove();
+//         saveTableData();
+//     }
+//     );
+// }
+
+// function saveTableData() {
+//     const table_rows = Array.from(task_list.querySelectorAll('tr')); // Select all table rows
+//     const table_data = table_rows.map(row => {
+//         const task = row.querySelector('.task-text-cell').value.trim();
+//         console.log(task);
+//         const period = row.querySelector('.no-of-periods-cell').value.trim();
+//         console.log(period);
+//         return { task, period };
+//     });
+//     localStorage.setItem('table_data', JSON.stringify(table_data)); // Save data as JSON in localStorage
+// }
+
+// initializeTable();
+// //Functions for STORAGE end------------------------------------------------------
+
 
 // Event Listeners
 start_btn.addEventListener('click', startTimer);
