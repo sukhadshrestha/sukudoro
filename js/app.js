@@ -260,54 +260,55 @@ function editRow(row){
         new_text.style.border = '1px solid #ccc';
         new_period.style.border = '1px solid #ccc';
     }
+    saveTableData();
 }
 //Functions for TASKS end------------------------------------------------------
 
 //Functions for STORAGE start------------------------------------------------------
 
-// function initializeTable() {
-//     const storedData = JSON.parse(localStorage.getItem('task_list')) || [];
-//     storedData.forEach(rowData => {
-//         addRowToTable(rowData.task, rowData.period);
-//     });
-// }
+function initializeTable() {
+    const storedData = JSON.parse(localStorage.getItem('task_list')) || [];
+    storedData.forEach(rowData => {
+        addRowToTable(rowData.task, rowData.period);
+    });
+}
 
-// function addRowToTable(task, period){
-//     const row = document.createElement('tr');
-//     row.innerHTML = `
-//         <tr>
-//             <td class="task-text-cell">${task}</td>
-//             <td class="no-of-periods-cell">${period}</td>
-//             <td>
-//                 <button class="edit-btn">Edit</button>
-//                 <button class="delete-btn">Delete</button>
-//             </td>
-//         </tr>
-//     `;
+function addRowToTable(task, period){
+    const row = document.createElement('tr');
+    row.innerHTML = `
+            <td class="task-text-cell">${task}</td>
+            <td class="no-of-periods-cell">${period}</td>
+            <td>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </td>
+    `;
 
-//     row.querySelector('.edit-btn').addEventListener('click', () => editRow(row));
+    row.querySelector('.edit-btn').addEventListener('click', () => editRow(row));
 
-//     row.querySelector('.delete-btn').addEventListener('click', () => {
-//         row.remove();
-//         saveTableData();
-//     }
-//     );
-// }
+    row.querySelector('.delete-btn').addEventListener('click', () => {
+        row.remove();
+        saveTableData();
+    }
+    );
+    task_list.appendChild(row);
+}
 
-// function saveTableData() {
-//     const table_rows = Array.from(task_list.querySelectorAll('tr')); // Select all table rows
-//     const table_data = table_rows.map(row => {
-//         const task = row.querySelector('.task-text-cell').value.trim();
-//         console.log(task);
-//         const period = row.querySelector('.no-of-periods-cell').value.trim();
-//         console.log(period);
-//         return { task, period };
-//     });
-//     localStorage.setItem('table_data', JSON.stringify(table_data)); // Save data as JSON in localStorage
-// }
+function saveTableData() {
+    const table_rows = Array.from(task_list.querySelectorAll('tr')).filter(row => 
+        row.querySelector('.task-text-cell') && row.querySelector('.no-of-periods-cell')
+    );
+    const table_data = table_rows.map(row => {
+        const task = row.querySelector('.task-text-cell').textContent.trim();
+        const period = row.querySelector('.no-of-periods-cell').textContent.trim();
+        return {task, period};
+    });
+    // console.log(JSON.stringify(table_data));
+    localStorage.setItem('task_list', JSON.stringify(table_data)); // Save data as JSON in localStorage
+}
 
-// initializeTable();
-// //Functions for STORAGE end------------------------------------------------------
+initializeTable();
+//Functions for STORAGE end------------------------------------------------------
 
 
 // Event Listeners
