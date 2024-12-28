@@ -81,6 +81,8 @@ function focusPeriodTimer(){
         is_running = false;
         is_focus_period = true;
         app_bg.style.background = "#7fffd488";
+        start_btn.disabled = false;
+        pause_btn.disabled = true;
     }
 }
 
@@ -93,6 +95,8 @@ function breakPeriodTimer(){
         is_running = false;
         is_focus_period = false;
         app_bg.style.background = "#9ccdf888";
+        start_btn.disabled = false;
+        pause_btn.disabled = true;
     }
 }
 
