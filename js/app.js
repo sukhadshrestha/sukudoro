@@ -13,28 +13,29 @@ const start_btn = document.getElementById('start');
 const pause_btn = document.getElementById('pause');
 const reset_btn = document.getElementById('reset');
 const end_btn = document.getElementById('end');
-const task_input = document.getElementById('task_input');
-const add_task_btn = document.getElementById('add_task');
-const task_list = document.getElementById('task_list');
-const task_periods = document.getElementById('no_of_periods');
-const focus_period_btn = document.getElementById('focus_period');
-const break_period_btn = document.getElementById('break_period');
+const task_input = document.getElementById('task-input');
+const add_task_btn = document.getElementById('add-task');
+const task_list = document.getElementById('task-list');
+const task_periods = document.getElementById('no-of-periods');
+const focus_period_btn = document.getElementById('focus-period');
+const break_period_btn = document.getElementById('break-period');
 
 const audio_focus_over = new Audio('assets/audio/focus_period_over.mp3')
 const audio_break_over = new Audio('assets/audio/break_over.mp3')
 
-const custom_focus = document.getElementById('custom_focus');
-const custom_break = document.getElementById('custom_break');
-const save_customization_btn = document.getElementById('save_customization');
+const custom_focus = document.getElementById('custom-focus');
+const custom_break = document.getElementById('custom-break');
+const save_customization_btn = document.getElementById('save-customization');
 
 const customize_btn = document.getElementById('customize');
 const popup = document.getElementById('popup');
-const close_popup_btn = document.getElementById('close_popup_btn');
+const close_popup_btn = document.getElementById('close-popup-btn');
 
 //Functions for TIMER start ------------------------------------------------------
 function updateTimer(){
     timer_element.textContent = `${String(timer_minutes).padStart(2,'0')}:${String(timer_seconds).padStart(2,'0')}`;
 }
+
 
 function customizeTime(){
     let custom_focus_time = custom_focus.value;
@@ -44,13 +45,13 @@ function customizeTime(){
     
     if(!Number.isInteger(Number(focus_minutes)) || focus_minutes <= 0){
         custom_focus.style.border = '2px solid red';
-        alert("Enter whole number");
+        alert("Enter a natural number");
         return;
     }
     
     if(!Number.isInteger(Number(break_minutes)) || break_minutes <= 0){
         custom_break.style.border = '2px solid red';
-        alert("Enter whole number");
+        alert("Enter a natural number");
         return;
     }
 
@@ -182,7 +183,7 @@ function addTask(){
 
     if(!Number.isInteger(Number(no_of_periods)) || no_of_periods <= 0){
         task_periods.style.border = '2px solid red';
-        alert("Enter whole number");
+        alert("Enter a natural number");
         return;
     }
 
@@ -249,7 +250,7 @@ function editRow(row){
     
         if(!Number.isInteger(Number(new_period.value)) || new_period.value <= 0){
             new_period.style.border = '2px solid red';
-            alert("Enter whole number");
+            alert("Enter a natural number");
             return;
         }
         task_cell.textContent = new_text.value.trim();
@@ -303,8 +304,7 @@ function saveTableData() {
         const period = row.querySelector('.no-of-periods-cell').textContent.trim();
         return {task, period};
     });
-    // console.log(JSON.stringify(table_data));
-    localStorage.setItem('task_list', JSON.stringify(table_data)); // Save data as JSON in localStorage
+    localStorage.setItem('task_list', JSON.stringify(table_data));
 }
 
 initializeTable();

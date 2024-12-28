@@ -3,6 +3,7 @@ body {
     text-align: center;
     background-color: aliceblue;
     color: #505050;
+    font-size: 14px;
 }
 
 div{
@@ -17,7 +18,7 @@ input{
 }
 
 .app {
-    background-color: beige;
+    background-color: #7fffd488;
     border-radius: 16px;
     width: 500px;
     margin: auto;
@@ -25,43 +26,45 @@ input{
 }
 
 .timer{
-    font-size: 32px;
+    font-size: 36px;
+    padding: 40px;
 }
 
-#add_task{
+#add-task{
     margin-top: 10px;
 }
 
 button{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    padding: 15px;
-    background-color: aquamarine;
+    padding: 10px 15px 10px 15px;
+    background-color: #4682b4;
     border-width: 1px;
     border-color: #00000000;
     border-radius: 16px;
-    color: #505050;
+    color: white;
+    margin: 0px 5px 0px 5px;
 }
 
 button:hover{
     border-width: 1px;
     border-color: black;
-    background-color: #7fffa7;
+    background-color: #1b3b49;
     cursor: pointer;
 }
 
 button:disabled{
-    background-color: rgb(175, 175, 175);
+    background-color: rgb(148, 148, 148);
     cursor: not-allowed;
     border-width: 0px;
 }
 
-.close_popup_btn{
+.close-popup-btn{
     display: block;
     width: 24px;
     float: right;
 }
 
-.close_popup_btn:hover{
+.close-popup-btn:hover{
     cursor: pointer;
 }
 
@@ -72,6 +75,7 @@ table {
 }
 
 th{
+    font-size: 16px;
     padding: 10px;
 }
 
@@ -79,7 +83,7 @@ th{
     display: none;
 }
 
-.popup_overlay{
+.popup-overlay{
     position: fixed;
     display: none;
     height: 100%;
@@ -91,7 +95,8 @@ th{
     background-color: #f0f0f080;
 }
 
-.popup_content{
+.popup-content{
     background-color: aliceblue;
-    padding: 50px;
+    padding: 30px;
+    border-radius: 16px;
 }
