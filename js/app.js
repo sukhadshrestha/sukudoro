@@ -8,6 +8,7 @@ let break_seconds = 0;
 let timer;
 let is_focus_period = true;
 
+const app_bg = document.getElementById('app');
 const timer_element = document.getElementById('timer');
 const start_btn = document.getElementById('start');
 const pause_btn = document.getElementById('pause');
@@ -79,6 +80,7 @@ function focusPeriodTimer(){
         updateTimer();
         is_running = false;
         is_focus_period = true;
+        app_bg.style.background = "#7fffd488";
     }
 }
 
@@ -90,6 +92,7 @@ function breakPeriodTimer(){
         updateTimer();
         is_running = false;
         is_focus_period = false;
+        app_bg.style.background = "#9ccdf888";
     }
 }
 
