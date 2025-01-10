@@ -103,30 +103,38 @@ function breakPeriodTimer(){
 function startTimer(){
     if(is_running) return;
     is_running = true;
+
+    let start_time = Date.now();
+    let remaining_time = timer_minutes*60 + timer_seconds;
+
     timer = setInterval(() => {
-        if(timer_seconds === 0){
-            if(timer_minutes === 0){
-                if(is_focus_period){
-                    audio_focus_over.play();
-                    alert("Focus Period has Ended");
-                    breakPeriodTimer();
-                    return;
-                }
-                else{
-                    audio_break_over.play();
-                    alert("Break is over");
-                    focusPeriodTimer();
-                    return;
-                }
+
+        const elasped = Math.floor((Date.now() - start_time)/1000);
+        const current_time = remaining_time - elasped;
+
+        if(current_time <=0){
+            clearInterval(timer);
+            timer_minutes = 0;
+            timer_seconds = 0;
+            updateTimer();
+            if(is_focus_period){
+                audio_focus_over.play();
+                alert("Focus Period has Ended");
+                breakPeriodTimer();
+                return;
             }
-            timer_minutes--;
-            timer_seconds = 59;
+            else{
+                audio_break_over.play();
+                alert("Break is over");
+                focusPeriodTimer();
+                return;
+            }
         }
-        else{
-            timer_seconds--;
-        }
+        timer_minutes = Math.floor(current_time/60);
+        timer_seconds = current_time%60;
         updateTimer();
     }, 1000)
+
     start_btn.disabled = true;
     pause_btn.disabled = false;
 }
@@ -147,13 +155,12 @@ function resetTimer(){
     if(is_focus_period){
         timer_minutes = focus_minutes;
         timer_seconds = focus_seconds;
-        updateTimer();
     }
     else{
         timer_minutes = break_minutes;
         timer_seconds = break_seconds;
-        updateTimer();    
     }
+    updateTimer();
     start_btn.disabled = false;
     pause_btn.disabled = true;
 }
