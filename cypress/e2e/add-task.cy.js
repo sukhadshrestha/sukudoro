@@ -1,6 +1,6 @@
 describe('Add task', () => {
     it('add task', () => {
-      cy.visit('./index.html')
+      cy.visit('/')
       cy.wait(3000)
       cy.getCyAttr('add-task-name').type('Random Task')
       cy.getCyAttr('add-no-of-period').type('2')
