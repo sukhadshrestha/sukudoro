@@ -17,21 +17,21 @@
         </div>
         <div class="timer" id="timer">25:00</div>
         <div class="controls">
-            <button id="start">Start</button>
-            <button id="pause">Pause</button>
-            <button id="reset">Reset</button>
-            <button id="end">End</button>
+            <button id="start" cy-attr = "start">Start</button>
+            <button id="pause" cy-attr = "pause">Pause</button>
+            <button id="reset" cy-attr = "reset">Reset</button>
+            <button id="end" cy-attr = "end">End</button>
         </div>
         <h2>Tasks</h2>
         <div class="tasks">
             <label for="task-input">Add task <span style="color: red;">*</span></label>
-            <input type="text" id="task-input" placeholder="Add a task" required><br>
+            <input type="text" id="task-input" cy-attr="add-task-name" placeholder="Add a task" required><br>
             <label for="no-of-periods">No. of Periods <span style="color: red;">*</span></label>
-            <input type="number" id="no-of-periods" placeholder="No. of Periods" min="1" step="1" required><br>
-            <button id="add-task">Add Task</button>
+            <input type="number" id="no-of-periods" cy-attr="add-no-of-period" placeholder="No. of Periods" min="1" step="1" required><br>
+            <button id="add-task" cy-attr="add-task-submit">Add Task</button>
         </div>
         <div class="task-table">
-            <table  id="task-list">
+            <table  id="task-list" cy-attr="task-table">
                 <tr>
                     <th>Task</th>
                     <th>No. of Periods</th>
